@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 上傳區域整體佈局 */
+.upload-section {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 通用上傳按鈕樣式 */
+.upload-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    touch-action: manipulation;
+    display: inline-block;
+}
+
+.upload-btn:hover, .upload-btn:active {
+    background-color: #0056b3;
+}
+
+/* 重設按鈕的特定樣式 */
+.reset-btn {
+    background-color: #dc3545; /* 紅色 */
+}
+
+.reset-btn:hover, .reset-btn:active {
+    background-color: #c82333; /* 深紅色 */
+}
+
+/* 上傳提示文字樣式 */
+.upload-hint {
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px; /* 確保與上方控制區有間距 */
+}
+
+/* 隱藏的原生文件上傳輸入框 */
+/* input[type="file"] { display: none; } */ /* 由 HTML 中的 style="display: none;" 控制 */
+
+/* --- 新增/修改用於新佈局的樣式 --- */
+
+/* 學生照片上傳區塊 */
+.student-photo-upload {
+    margin-bottom: 20px; /* 與下方控制區塊的間距 */
+    text-align: center; /* 讓按鈕居中 */
+}
+
+/* 主要控制項的水平佈局容器 */
+.controls-layout {
+    display: flex;           /* 啟用 Flexbox */
+    flex-wrap: wrap;         /* 允許換行 */
+    justify-content: space-around; /* 水平分散對齊各區塊 */
+    align-items: flex-end; /* 垂直底部對齊各區塊 */
+    gap: 20px;               /* 區塊之間的間距 */
+    width: 100%;             /* 佔滿容器寬度 */
+    margin-bottom: 20px;     /* 與下方提示文字的間距 */
+    border-top: 1px solid #eee; /* 可選：加一條分隔線 */
+    padding-top: 20px;         /* 可選：分隔線與內容的間距 */
+}
+
+/* 單個控制區塊樣式 */
+.control-block {
+    display: flex;
+    flex-direction: column; /* 區塊內部元素垂直排列 */
+    align-items: center;    /* 區塊內部元素水平居中 */
+    gap: 15px;              /* 區塊內部元素的垂直間距 */
+    min-width: 150px;       /* 設定一個最小寬度，避免擠壓 */
+    text-align: center;     /* 確保標籤等文字居中 */
+}
+
+/* 微調下拉選單的包裹器和樣式 */
+.control-block .select-wrapper {
+    display: flex;
+    flex-direction: column; /* 讓標籤在下拉選單上方 */
+    align-items: center;
+    gap: 5px;
+    width: 100%; /* 讓下拉選單的寬度一致 */
+}
+.control-block .select-wrapper label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 0; /* 覆蓋可能存在的全局樣式 */
+}
+.control-block .select-wrapper select {
+    padding: 5px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    min-width: 120px;
+    width: 100%; /* 讓下拉選單填滿包裹器 */
+    max-width: 150px; /* 但給個最大寬度 */
+    cursor: pointer;
+}
+
+
+/* 上傳按鈕容器 (圖示和音效) */
+.icon-upload-container,
+.sound-upload-container {
+     width: 100%; /* 讓容器寬度一致 */
+     display: flex; /* 使用 flex 讓 label 居中 */
+     justify-content: center;
+}
+
+/* 調整控制區塊內的按鈕樣式 */
+.control-block .upload-btn {
+    width: 100%; /* 讓上傳按鈕填滿其容器 */
+    max-width: 150px; /* 但給個最大寬度 */
+}
+
+
+/* 加分圖示預覽容器 */
+.bonus-icon-preview-container {
+    width: 100px; /* 設定框框寬度 */
+    height: 100px; /* 設定框框高度 */
+    border: 2px solid red; /* 紅色邊框 */
+    display: flex; /* 使用 flex 佈局 */
+    justify-content: center; /* 水平居中內部圖片 */
+    align-items: center; /* 垂直居中內部圖片 */
+    background-color: #f8f9fa; /* 可選：淺灰色背景 */
+    border-radius: 4px; /* 可選：圓角 */
+    overflow: hidden; /* 確保圖片不溢出 */
+    flex-shrink: 0; /* 防止容器被壓縮 */
+    visibility: hidden; /* 初始隱藏內容，但佔位 */
+}
+/* 當 JS 添加 has-content class 時顯示 */
+.bonus-icon-preview-container.has-content {
+    visibility: visible;
+}
+
+/* 預覽圖示本身的樣式 */
+.bonus-icon-preview {
+    max-width: 100%; /* 讓圖片最大寬度為容器的 90% */
+    max-height: 100%; /* 讓圖片最大高度為容器的 90% */
+    object-fit: contain; /* 保持圖片原始比例 */
+    display: block; /* 使 max-width/height 生效 */
+}
+
+
+/* == 學生列表相關樣式 (保持不變) == */
+
+/* 加分圖示顯示區域 (在學生行內) */
+.icon-display {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 55px;
+    padding: 5px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin-top: 10px;
+    touch-action: manipulation;
+}
+
+.icon-display img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    touch-action: manipulation;
+}
+
+/* 學生列表容器 */
+.students-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* 單個學生行 */
+.student-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
+    touch-action: manipulation;
+}
+
+.student-row:hover {
+    background-color: #e9ecef;
+}
+
+/* 排名數字 */
+.rank-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+    min-width: 40px;
+    text-align: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+/* 照片區域（照片+加扣分按鈕） */
+.photo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.student-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 5px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+}
+
+/* 加扣分按鈕組 */
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.add-point-btn, .subtract-point-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    touch-action: manipulation;
+}
+
+.add-point-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.add-point-btn:hover, .add-point-btn:active {
+    background-color: #45a049;
+}
+
+.subtract-point-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.subtract-point-btn:hover, .subtract-point-btn:active {
+    background-color: #da190b;
+}
+
+/* 學生資訊區域（分數+操作按鈕+圖示） */
+.student-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+/* 分數和操作按鈕（更改照片、刪除）的區域 */
+.score-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.student-score {
+    font-size: 24px;
+    font-weight: bold;
+    color: #28a745;
+    min-width: 80px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+/* 操作按鈕組（更改照片、刪除） */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.change-photo-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    touch-action: manipulation;
+}
+
+.change-photo-btn {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.change-photo-btn:hover, .change-photo-btn:active {
+    background-color: #e0a800;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover, .delete-btn:active {
+    background-color: #c82333;
+}
+
+/* 移除舊的或不再需要的佈局樣式（可選，但建議整理） */
+/* .upload-group { ... } */
+/* .horizontal-group { ... } */
+/* .settings-group { ... } */
+/* .bonus-icon-section { ... } */

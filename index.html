@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生優良行為計分板</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>學生優良行為計分板</h1>
+
+        <div class="upload-section">
+
+            <div class="student-photo-upload">
+                 <input type="file" id="photoUpload" accept="image/*" multiple style="display: none;">
+                 <label for="photoUpload" class="upload-btn">上傳學生照片</label>
+            </div>
+
+            <div class="controls-layout">
+
+                <div class="control-block">
+                    <button id="rankButton" class="upload-btn">分數排名</button>
+                    <button id="resetButton" class="upload-btn reset-btn">重新開始</button>
+                </div>
+
+                <div class="control-block">
+                    <div class="select-wrapper">
+                        <label for="bonusSoundSelect">加分音效:</label>
+                        <select id="bonusSoundSelect">
+                            <option value="sound/bouns01.mp3">音效 1</option>
+                            <option value="sound/bouns02.mp3">音效 2</option>
+                            <option value="sound/bouns03.mp3">音效 3</option>
+                            <option value="" id="customSoundOption" disabled hidden>自訂音效</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                         <label for="bonusIconSelect">加分圖示:</label>
+                         <select id="bonusIconSelect">
+                             <option value="png/1.png">蘋果</option>
+                             <option value="png/2.png">星星</option>
+                             <option value="png/3.png">讚</option>
+                             <option value="png/4.png">錢幣</option>
+                             <option value="png/5.png">山豬</option>
+                             <option value="" id="customIconOption" disabled hidden>自訂圖示</option>
+                         </select>
+                     </div>
+                </div>
+
+                <div class="control-block">
+                    <div class="icon-upload-container">
+                        <input type="file" id="iconUploadInput" accept="image/*" style="display: none;">
+                        <label for="iconUploadInput" class="upload-btn">上傳加分圖示</label>
+                    </div>
+                    <div class="sound-upload-container">
+                         <input type="file" id="soundUploadInput" accept="audio/*" style="display: none;">
+                         <label for="soundUploadInput" class="upload-btn">上傳加分音效</label>
+                     </div>
+                </div>
+
+                <div class="control-block">
+                    <div class="bonus-icon-preview-container">
+                        <img id="bonusIconPreview" src="" alt="加分圖示預覽" class="bonus-icon-preview">
+                    </div>
+                </div>
+
+            </div> <p class="upload-hint">提示：上傳的加分圖示/音效僅在此次瀏覽期間有效，關閉網頁後需重新上傳。</p>
+
+        </div> <div id="studentsContainer" class="students-container">
+            </div>
+
+    </div> <script src="script.js"></script>
+</body>
+</html>
